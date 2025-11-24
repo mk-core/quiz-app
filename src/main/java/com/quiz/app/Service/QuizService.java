@@ -3,12 +3,15 @@ package com.quiz.app.Service;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.quiz.app.entity.Question;
 import com.quiz.app.entity.Quiz;
 import com.quiz.app.exception.QuizAppException;
-import com.quiz.app.model.request.QuizRequest;
+import com.quiz.app.model.request.CreateQuizRequest;
+import com.quiz.app.repository.QuestionRepository;
 import com.quiz.app.repository.QuizReppository;
 
 import lombok.RequiredArgsConstructor;
@@ -18,8 +21,9 @@ import lombok.RequiredArgsConstructor;
 public class QuizService {
 
 	private final QuizReppository quizrepository;
+	private final QuestionRepository questionRepository;
 
-	public Quiz createQuiz(QuizRequest quizRequest) throws QuizAppException {
+	public Quiz createQuiz(CreateQuizRequest quizRequest) throws QuizAppException {
 
 		try {
 			Quiz quiz = new Quiz();
@@ -47,7 +51,7 @@ public class QuizService {
 				return q;
 			}).collect(Collectors.toSet());
 
-			quiz.setQuestions(questions);
+			quiz.setQuestion(questions);
 
 			return quizrepository.save(quiz);
 		} catch (Exception e) {
@@ -55,5 +59,12 @@ public class QuizService {
 			throw new QuizAppException(e, e.getMessage());
 		}
 
+	}
+
+	public Page<Question> getQuestions(Pageable pageable, Long quizId) throws QuizAppException {
+
+		Quiz quiz = quizrepository.findById(quizId).orElseThrow(() -> new QuizAppException("Quiz not found!"));
+		
+		return questionRepository.findByQuiz(quiz, pageable);
 	}
 }

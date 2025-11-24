@@ -22,8 +22,8 @@ import lombok.ToString;
 @Table(name = "quiz")
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = "questions")
-@ToString(exclude = "questions")
+@EqualsAndHashCode(exclude = "question")
+@ToString(exclude = "question")
 public class Quiz {
 
 	@Id
@@ -36,7 +36,7 @@ public class Quiz {
 	@Column(nullable = false)
 	private String category;
 	
-	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = false)
+	@OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = false)
 	@JsonManagedReference
-	Set<Question> questions = new HashSet<>();
+	Set<Question> question = new HashSet<>();
 }
