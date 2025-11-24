@@ -1,0 +1,52 @@
+i# Build artifacts
+target/
+build/
+*.jar
+*.war
+*.ear
+
+.metadata
+.sonarlint
+
+# Maven wrapper
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle files
+.gradle/
+build/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+.factorypath
+.sts4-cache/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Log files
+*.log
+logs/
+
+# Environment variables and sensitive data
+.env
+application*.properties.example
+application*.yml.example
+
+# Test reports and coverage
+test-reports/
+coverage/
+
+# Temporary files
+*.swp
+*.tmp
+*~
+.#*
