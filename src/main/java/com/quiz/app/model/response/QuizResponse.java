@@ -2,6 +2,7 @@ package com.quiz.app.model.response;
 
 public record QuizResponse(
 		Long quizId,
+		Long questionId,
 		String question,
 		String level,
 		String option1,
