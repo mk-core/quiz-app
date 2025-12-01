@@ -26,7 +26,7 @@ public class DefaultAdminUserRunner {
 			QuizUser quizUser = new QuizUser();
 			quizUser.setUsername("admin");
 			quizUser.setPassword(bCryptPasswordEncoder.encode("admin"));
-			quizUser.setRole("ROLE_USER");
+			quizUser.setRole("ROLE_ADMIN");
 			
 			userRepository.save(quizUser);
 			
